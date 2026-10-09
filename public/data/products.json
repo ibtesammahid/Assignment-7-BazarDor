@@ -1,0 +1,328 @@
+[
+  {
+    "id": 1,
+    "slug": "miniket-rice",
+    "nameBn": "মিনিকেট চাল",
+    "category": "chal",
+    "categoryNameBn": "চাল",
+    "categoryIcon": "🍚",
+    "unit": "kg",
+    "image": "🍚",
+    "today": 75,
+    "yesterday": 72,
+    "lastWeek": 70,
+    "lastMonth": 68,
+    "change": {
+      "dir": "up",
+      "pct": 4.17
+    },
+    "markets": [
+      {
+        "market": "কারওয়ান বাজার",
+        "division": "ঢাকা",
+        "min": 72,
+        "max": 78
+      },
+      {
+        "market": "রিয়াজউদ্দিন বাজার",
+        "division": "চট্টগ্রাম",
+        "min": 73,
+        "max": 80
+      },
+      {
+        "market": "রংপুর বাজার",
+        "division": "রংপুর",
+        "min": 70,
+        "max": 76
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "miniket-atap-rice",
+    "nameBn": "আতপ চাল",
+    "category": "chal",
+    "categoryNameBn": "চাল",
+    "categoryIcon": "🍚",
+    "unit": "kg",
+    "image": "🍚",
+    "today": 68,
+    "yesterday": 70,
+    "lastWeek": 69,
+    "lastMonth": 65,
+    "change": {
+      "dir": "down",
+      "pct": 2.86
+    },
+    "markets": [
+      {
+        "market": "কারওয়ান বাজার",
+        "division": "ঢাকা",
+        "min": 65,
+        "max": 70
+      },
+      {
+        "market": "খাতুনগঞ্জ",
+        "division": "চট্টগ্রাম",
+        "min": 66,
+        "max": 72
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "broiler-chicken",
+    "nameBn": "ব্রয়লার মুরগি",
+    "category": "mangsho",
+    "categoryNameBn": "মাংস",
+    "categoryIcon": "🍗",
+    "unit": "kg",
+    "image": "🍗",
+    "today": 190,
+    "yesterday": 185,
+    "lastWeek": 180,
+    "lastMonth": 175,
+    "change": {
+      "dir": "up",
+      "pct": 2.7
+    },
+    "markets": [
+      {
+        "market": "কারওয়ান বাজার",
+        "division": "ঢাকা",
+        "min": 185,
+        "max": 200
+      },
+      {
+        "market": "নিউমার্কেট",
+        "division": "রাজশাহী",
+        "min": 180,
+        "max": 195
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "beef",
+    "nameBn": "গরুর মাংস",
+    "category": "mangsho",
+    "categoryNameBn": "মাংস",
+    "categoryIcon": "🥩",
+    "unit": "kg",
+    "image": "🥩",
+    "today": 800,
+    "yesterday": 800,
+    "lastWeek": 780,
+    "lastMonth": 750,
+    "change": {
+      "dir": "up",
+      "pct": 0
+    },
+    "markets": [
+      {
+        "market": "কারওয়ান বাজার",
+        "division": "ঢাকা",
+        "min": 780,
+        "max": 850
+      },
+      {
+        "market": "বহদ্দারহাট",
+        "division": "চট্টগ্রাম",
+        "min": 790,
+        "max": 840
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "broiler-eggs",
+    "nameBn": "মুরগির ডিম",
+    "category": "dim",
+    "categoryNameBn": "ডিম",
+    "categoryIcon": "🥚",
+    "unit": "dozen",
+    "image": "🥚",
+    "today": 150,
+    "yesterday": 145,
+    "lastWeek": 140,
+    "lastMonth": 135,
+    "change": {
+      "dir": "up",
+      "pct": 3.45
+    },
+    "markets": [
+      {
+        "market": "কারওয়ান বাজার",
+        "division": "ঢাকা",
+        "min": 145,
+        "max": 155
+      },
+      {
+        "market": "সাগরিকা বাজার",
+        "division": "চট্টগ্রাম",
+        "min": 145,
+        "max": 160
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "potato",
+    "nameBn": "আলু",
+    "category": "sobji",
+    "categoryNameBn": "সবজি",
+    "categoryIcon": "🥔",
+    "unit": "kg",
+    "image": "🥔",
+    "today": 35,
+    "yesterday": 38,
+    "lastWeek": 40,
+    "lastMonth": 45,
+    "change": {
+      "dir": "down",
+      "pct": 7.89
+    },
+    "markets": [
+      {
+        "market": "কারওয়ান বাজার",
+        "division": "ঢাকা",
+        "min": 32,
+        "max": 38
+      },
+      {
+        "market": "শাপলা চত্বর বাজার",
+        "division": "রংপুর",
+        "min": 30,
+        "max": 36
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "onion",
+    "nameBn": "পেঁয়াজ",
+    "category": "sobji",
+    "categoryNameBn": "সবজি",
+    "categoryIcon": "🧅",
+    "unit": "kg",
+    "image": "🧅",
+    "today": 60,
+    "yesterday": 55,
+    "lastWeek": 58,
+    "lastMonth": 50,
+    "change": {
+      "dir": "up",
+      "pct": 9.09
+    },
+    "markets": [
+      {
+        "market": "কারওয়ান বাজার",
+        "division": "ঢাকা",
+        "min": 55,
+        "max": 65
+      },
+      {
+        "market": "খাতুনগঞ্জ",
+        "division": "চট্টগ্রাম",
+        "min": 56,
+        "max": 68
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "soybean-oil",
+    "nameBn": "সয়াবিন তেল",
+    "category": "tel",
+    "categoryNameBn": "তেল",
+    "categoryIcon": "🛢️",
+    "unit": "liter",
+    "image": "🛢️",
+    "today": 170,
+    "yesterday": 170,
+    "lastWeek": 168,
+    "lastMonth": 165,
+    "change": {
+      "dir": "up",
+      "pct": 0
+    },
+    "markets": [
+      {
+        "market": "কারওয়ান বাজার",
+        "division": "ঢাকা",
+        "min": 165,
+        "max": 175
+      },
+      {
+        "market": "রিয়াজউদ্দিন বাজার",
+        "division": "চট্টগ্রাম",
+        "min": 165,
+        "max": 178
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "sugar",
+    "nameBn": "চিনি",
+    "category": "chini",
+    "categoryNameBn": "চিনি",
+    "categoryIcon": "🍬",
+    "unit": "kg",
+    "image": "🍬",
+    "today": 130,
+    "yesterday": 128,
+    "lastWeek": 125,
+    "lastMonth": 120,
+    "change": {
+      "dir": "up",
+      "pct": 1.56
+    },
+    "markets": [
+      {
+        "market": "কারওয়ান বাজার",
+        "division": "ঢাকা",
+        "min": 125,
+        "max": 135
+      },
+      {
+        "market": "খাতুনগঞ্জ",
+        "division": "চট্টগ্রাম",
+        "min": 126,
+        "max": 138
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "green-chili",
+    "nameBn": "কাঁচা মরিচ",
+    "category": "moshla",
+    "categoryNameBn": "মসলা",
+    "categoryIcon": "🌶️",
+    "unit": "kg",
+    "image": "🌶️",
+    "today": 100,
+    "yesterday": 90,
+    "lastWeek": 80,
+    "lastMonth": 70,
+    "change": {
+      "dir": "up",
+      "pct": 11.11
+    },
+    "markets": [
+      {
+        "market": "কারওয়ান বাজার",
+        "division": "ঢাকা",
+        "min": 90,
+        "max": 110
+      },
+      {
+        "market": "খাতুনগঞ্জ",
+        "division": "চট্টগ্রাম",
+        "min": 95,
+        "max": 120
+      }
+    ]
+  }
+]
