@@ -4,8 +4,22 @@ import "react-marquee-text/dist/styles.css";
 
 const toBanglaNumber = (value: number) =>
   new Intl.NumberFormat("bn-BD").format(value);
+
+const dictionary : Record <string, string> = {
+  "litre": "লিটার",
+  "kg": "কেজি",
+  "dozen": "ডজন",
+  "piece": "পিস",    
+};
+const tobanglaUnit = (unit: string):string => {
+  return dictionary[unit.toLowerCase()] ?? unit;
+};
+
 const Marquee = async () => {
-  const res = await fetch("http://localhost:3000/data/products.json");
+  // const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
+  // const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
+  const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
+  // const res = await fetch("http://localhost:3000/data/products.json");
   const scrollData = await res.json();
   console.log(scrollData);
   return (
@@ -15,7 +29,7 @@ const Marquee = async () => {
           <span key={product.id}>
             <span>{product.image}</span>{" "}
             <span className="font-bold mr-1"> {product.nameBn}</span>{" "}
-            <span>{toBanglaNumber(product.today)} টাকা/কেজি</span>
+            <span>{toBanglaNumber(product.today)} টাকা/{tobanglaUnit(product.unit)}</span>
             <span
               className={`ml-1 mr-7 ${product.change.dir === "up" ? "text-red-600" : "text-green-400"}`}
             >

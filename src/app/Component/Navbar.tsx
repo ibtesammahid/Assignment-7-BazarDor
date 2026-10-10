@@ -2,12 +2,14 @@ import Image from "next/image";
 import Logo from "@/assets/logo-icon.png";
 import Navlinks from "./Navlinks";
 import Link from "next/link";
+import DateBadge from "./CurrentDateNav";
+import { NavlinksTypes } from "@/Types/NavlinksTypes";
 
-interface NavbarProps {
-  date: string;
-}
+const Navbar = async () => {
+  // const res = await fetch("https://api.abcz.workers.dev/api/bazardor/categories");
+  const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
 
-const Navbar = ({ date }: NavbarProps) => {
+  const categories: NavlinksTypes[] = await res.json();
   return (
     <div className=" border-b border-gray-100 bg-[#fafcfa]">
       <div className="flex justify-between items-center px-4 py-3 mx-auto max-w-7xl">
@@ -26,7 +28,7 @@ const Navbar = ({ date }: NavbarProps) => {
             <Link href="/" className="font-bold text-xl">
               বাজার দর
             </Link>
-            <p className="text-[12px]">{date}</p>
+            <DateBadge />
           </div>
         </div>
 
@@ -39,7 +41,7 @@ const Navbar = ({ date }: NavbarProps) => {
         </div>
       </div>
       <div className="border-t border-gray-100">
-        <Navlinks />
+        <Navlinks categories={categories} />
       </div>
     </div>
   );

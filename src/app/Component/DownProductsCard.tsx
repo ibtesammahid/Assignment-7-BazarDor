@@ -4,6 +4,16 @@ import Image from "next/image";
 const toBanglaNumber = (value: number) =>
   new Intl.NumberFormat("bn-BD").format(value);
 
+const dictionary : Record <string, string> = {
+  "litre": "লিটার",
+  "kg": "কেজি",
+  "dozen": "ডজন",
+  "piece": "পিস",    
+};
+const tobanglaUnit = (unit: string):string => {
+  return dictionary[unit.toLowerCase()] ?? unit;
+};
+
 const ProductCard = ({ productDown }: { productDown: Product }) => {
   if (!productDown) {
     console.error("ProductCard received no product");
@@ -33,7 +43,7 @@ const ProductCard = ({ productDown }: { productDown: Product }) => {
           <h3 className="truncate text-sm font-bold text-[#26352b]">
             {productDown.nameBn}
           </h3>
-          <p className="text-xs text-gray-500">প্রতি কেজি</p>
+          <p className="text-xs text-gray-500">প্রতি {tobanglaUnit(productDown.unit)}</p>
         </div>
       </div>
 

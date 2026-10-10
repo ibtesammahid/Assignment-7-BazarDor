@@ -1,8 +1,19 @@
 import { Product } from "@/Types/AllProductsType";
 import Image from "next/image";
+import Link from "next/link";
 
 const toBanglaNumber = (value: number) =>
   new Intl.NumberFormat("bn-BD").format(value);
+
+const dictionary : Record <string, string> = {
+  "litre": "লিটার",
+  "kg": "কেজি",
+  "dozen": "ডজন",
+    "piece": "পিস",
+};
+const tobanglaUnit = (unit: string):string => {
+  return dictionary[unit.toLowerCase()] ?? unit;
+};
 
 const ProductCard = ({ product }: { product: Product }) => {
   if (!product) {
@@ -11,7 +22,10 @@ const ProductCard = ({ product }: { product: Product }) => {
   }
 
   return (
-    <article className="flex min-w-0 flex-col justify-between rounded-xl border border-[#e3eae4] bg-[#fafcfa] p-3 transition-shadow hover:shadow-sm">
+
+
+    <Link href={`/products/${product.slug}`}>
+      <article className="flex min-w-0 flex-col justify-between rounded-xl border border-[#e3eae4] bg-[#fafcfa] p-3 transition-shadow hover:shadow-sm">
       {/* Product information */}
       <div className="flex items-center gap-3">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#f0f4f0] text-2xl">
@@ -33,7 +47,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <h3 className="truncate text-sm font-bold text-[#26352b]">
             {product.nameBn}
           </h3>
-          <p className="text-xs text-gray-500">প্রতি কেজি</p>
+          <p className="text-xs text-gray-500">প্রতি {tobanglaUnit(product.unit)}</p>
         </div>
       </div>
 
@@ -57,6 +71,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         </span>
       </div>
     </article>
+</Link>
   );
 };
 

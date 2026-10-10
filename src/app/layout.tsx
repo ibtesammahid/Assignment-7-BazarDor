@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col ">
         <header className="sticky top-0 z-50 bg-white">
-          <Navbar date={date} />
+          <Navbar/>
         </header>
         <Marquee />
         <main>{children}</main>

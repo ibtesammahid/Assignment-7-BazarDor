@@ -3,9 +3,9 @@ import { Product } from "@/Types/AllProductsType";
 import ProductCard from "./AllProductCard";
 
 const TodayPriceUp = async () => {
-  const res = await fetch(
-    "http://localhost:3000/data/products.json"
-  );
+  // const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
+  // const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
+  const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
 
   if (!res.ok) {
     throw new Error("Failed to fetch products");
