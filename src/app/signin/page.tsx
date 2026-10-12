@@ -1,16 +1,69 @@
-
+"use client";
+import { authClient, signIn } from "@/lib/auth-client";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
-const SignUpPage = () => {
+const SignInPage = () => {
+
+    const onSubmit = async (event: React.SubmitEvent<HTMLElement>) => {
+      event.preventDefault();
+      const formData = new FormData(event.target as HTMLFormElement);
+      const user = Object.fromEntries(formData.entries()) as {
+        email: string;
+        password: string;
+      };
+      
+  
+      const { data, error } = await signIn.email({
+        ...user,
+        callbackURL: "/",
+      });
+  
+      if (data) {
+        toast.success("Sign in successfully!");
+      }
+      if (error) {
+        toast.error(error.message ?? "Sign in failed")
+      }
+    };
+
+     const handleGoogleSignUp = async () => {
+        const { data, error } = await authClient.signIn.social({
+          provider: "google",
+          callbackURL: "/",
+        });
+        if (data) {
+      toast.success("Sign In successfully!");
+    }
+    if (error) {
+      toast.error(error.message ?? "Sign In failed")
+    }
+
+    };
+
+    const handleGitHubSignUp = async () => {
+       const {data, error} = await authClient.signIn.social({
+        provider: "github",
+        callbackURL: "/",
+    })
+    if (data) {
+      toast.success("Sign In successfully!");
+    }
+    if (error) {
+      toast.error(error.message ?? "Sign In failed")
+    }
+    };
+
+
   return (
     <main className="flex flex-1 items-center justify-center bg-[#F0F5F0] px-4 py-8">
-      <form className="w-full max-w-xs">
+      <form onSubmit={onSubmit} className="w-full max-w-xs">
         <div className="mb-4 text-center">
           <h1 className="text-xl font-bold text-[#26352A]">
-            অ্যাকাউন্ট তৈরি করুন
+            সাইন ইন
           </h1>
           <p className="mt-1 text-xs text-gray-500">
-            বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
+           বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
           </p>
         </div>
 
@@ -62,6 +115,7 @@ const SignUpPage = () => {
 
           <div className="grid grid-cols-2 gap-2">
             <button
+              onClick={handleGoogleSignUp}
               type="button"
               className="flex min-w-0 items-center justify-center gap-1 rounded-md border border-[#E5E5E5] bg-white px-1 py-2 text-[10px] font-medium text-gray-800 transition hover:shadow-md"
             >
@@ -94,6 +148,7 @@ const SignUpPage = () => {
             </button>
 
             <button
+              onClick={handleGitHubSignUp}
               type="button"
               className="flex min-w-0 items-center justify-center gap-1 rounded-md border border-[#E5E5E5] bg-white px-1 py-2 text-[10px] font-medium text-gray-800 transition hover:shadow-md"
             >
@@ -134,5 +189,5 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;
 

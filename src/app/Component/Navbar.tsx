@@ -4,6 +4,7 @@ import Navlinks from "./Navlinks";
 import Link from "next/link";
 import DateBadge from "./CurrentDateNav";
 import { NavlinksTypes } from "@/Types/NavlinksTypes";
+import UserInfo from "./UserInfo";
 
 const Navbar = async () => {
   // const res = await fetch("https://api.abcz.workers.dev/api/bazardor/categories");
@@ -32,13 +33,7 @@ const Navbar = async () => {
           </div>
         </div>
 
-        <div className="flex gap-2">
-          <button className="text-sm">Sign In</button>
-
-          <button className="btn bg-[#05893E] text-white rounded-[7px] text-sm">
-            Sign up
-          </button>
-        </div>
+        <UserInfo />
       </div>
       <div className="border-t border-gray-100">
         <Navlinks categories={categories} />

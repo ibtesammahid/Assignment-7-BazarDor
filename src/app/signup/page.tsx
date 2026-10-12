@@ -1,34 +1,60 @@
 "use client";
-import { authClient } from "@/lib/auth-client";
+import { authClient, signUp } from "@/lib/auth-client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
+  const onSubmit = async (event: React.SubmitEvent<HTMLElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.target as HTMLFormElement);
+    const user = Object.fromEntries(formData.entries()) as {
+      name: string;
+      email: string;
+      password: string;
+    };
+    
 
-    const onSubmit = async (event: React.SubmitEvent<HTMLElement>) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const user = Object.fromEntries(formData.entries()) as {
-            name: string;
-            email: string;
-            password: string;
-            confirmPassword: string;
-        };
+    const { data, error } = await signUp.email({
+      ...user,
+      callbackURL: "/",
+    });
 
-        const {data, error} = await authClient.signUp.email({
-            ...user,
-            callbackURL: "/"
-        })
+    if (data) {
+      toast.success("Sign up successfully!");
+      redirect("/");
+    }
+    if (error) {
+      toast.error(error.message ?? "Sign up failed")
+    }
+ };
 
+     const handleGoogleSignUp = async () => {
+        const { data, error } = await authClient.signIn.social({
+          provider: "google",
+        });
         if (data) {
-            console.log("Sign up successful:", data);
-            redirect("/")
-        }
-        if (error) {
-            console.error("Sign up error:", error);
-        }
+        
+      redirect("/");
+    }
+    if (error) {
+      toast.error(error.message ?? "Sign up failed")
     }
 
+    };
+
+    const handleGitHubSignUp = async () => {
+       const {data, error} = await authClient.signIn.social({
+        provider: "github",
+        callbackURL: "/",
+    })
+    if (data) {
+      redirect("/");
+    }
+    if (error) {
+      toast.error(error.message ?? "Sign up failed")
+    }
+    };
 
   return (
     <main className="flex flex-1 items-center justify-center bg-[#F0F5F0] px-4 py-8">
@@ -45,7 +71,10 @@ const SignUpPage = () => {
         <fieldset className="rounded-xl border border-[#E3EBE4] bg-white/80 p-4 shadow-sm">
           <div className="space-y-3">
             <div className="flex flex-col gap-1">
-              <label htmlFor="name" className="text-xs font-medium text-gray-800">
+              <label
+                htmlFor="name"
+                className="text-xs font-medium text-gray-800"
+              >
                 নাম
               </label>
               <input
@@ -58,7 +87,10 @@ const SignUpPage = () => {
             </div>
 
             <div className="flex flex-col gap-1">
-              <label htmlFor="email" className="text-xs font-medium text-gray-800">
+              <label
+                htmlFor="email"
+                className="text-xs font-medium text-gray-800"
+              >
                 ইমেইল
               </label>
               <input
@@ -110,12 +142,11 @@ const SignUpPage = () => {
             অ্যাকাউন্ট তৈরি করুন
           </button>
 
-          <div className="divider my-2 text-xs text-gray-400">
-            অথবা
-          </div>
+          <div className="divider my-2 text-xs text-gray-400">অথবা</div>
 
           <div className="grid grid-cols-2 gap-2">
             <button
+              onClick={handleGoogleSignUp}
               type="button"
               className="flex min-w-0 items-center justify-center gap-1 rounded-md border border-[#E5E5E5] bg-white px-1 py-2 text-[10px] font-medium text-gray-800 transition hover:shadow-md"
             >
@@ -148,6 +179,7 @@ const SignUpPage = () => {
             </button>
 
             <button
+              onClick={handleGitHubSignUp}
               type="button"
               className="flex min-w-0 items-center justify-center gap-1 rounded-md border border-[#E5E5E5] bg-white px-1 py-2 text-[10px] font-medium text-gray-800 transition hover:shadow-md"
             >
@@ -177,16 +209,17 @@ const SignUpPage = () => {
           </p>
         </fieldset>
 
-        <Link href="/" className="mt-4 block text-center text-xs text-gray-500 hover:underline">
-        <p className="mt-4 text-center text-[10px] text-gray-400">
-          ← হোম পেজে ফিরে যান
-        </p>
-      </Link>
-
+        <Link
+          href="/"
+          className="mt-4 block text-center text-xs text-gray-500 hover:underline"
+        >
+          <p className="mt-4 text-center text-[10px] text-gray-400">
+            ← হোম পেজে ফিরে যান
+          </p>
+        </Link>
       </form>
     </main>
   );
 };
 
 export default SignUpPage;
-

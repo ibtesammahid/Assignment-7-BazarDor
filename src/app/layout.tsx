@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./Component/Navbar";
 import Marquee from "./Component/Marquee";
 import Footer from "./Component/Footer";
+import { Toaster } from "react-hot-toast";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali", "latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <section className=" bg-[#fafcfa] ">
           <Footer />
         </section>
+        <Toaster />
       </body>
     </html>
   );
