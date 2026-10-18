@@ -21,6 +21,7 @@ const SignInPage = () => {
   
       if (data) {
         toast.success("Sign in successfully!");
+
       }
       if (error) {
         toast.error(error.message ?? "Sign in failed")
@@ -75,6 +76,7 @@ const SignInPage = () => {
                 ইমেইল
               </label>
               <input
+                required
                 id="email"
                 type="email"
                 name="email"
@@ -91,6 +93,7 @@ const SignInPage = () => {
                 পাসওয়ার্ড
               </label>
               <input
+                required
                 id="password"
                 type="password"
                 name="password"

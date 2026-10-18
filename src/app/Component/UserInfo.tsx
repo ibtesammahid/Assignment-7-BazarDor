@@ -95,16 +95,16 @@ const UserInfo = () => {
           )}
         </>
       ) : (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <Link href="/signin" className="text-sm">
-            Sign In
+            সাইন ইন
           </Link>
 
           <Link
             href="/signup"
             className="rounded-[7px] bg-[#05893E] px-3 py-2 text-sm text-white"
           >
-            Sign up
+            সাইন আপ
           </Link>
         </div>
       )}

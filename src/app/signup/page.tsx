@@ -78,6 +78,7 @@ const SignUpPage = () => {
                 নাম
               </label>
               <input
+                required
                 id="name"
                 type="text"
                 name="name"
@@ -94,6 +95,7 @@ const SignUpPage = () => {
                 ইমেইল
               </label>
               <input
+                required
                 id="email"
                 type="email"
                 name="email"
@@ -110,6 +112,7 @@ const SignUpPage = () => {
                 পাসওয়ার্ড
               </label>
               <input
+                required
                 id="password"
                 type="password"
                 name="password"
@@ -126,6 +129,7 @@ const SignUpPage = () => {
                 পাসওয়ার্ড নিশ্চিত করুন
               </label>
               <input
+                required
                 id="confirmPassword"
                 type="password"
                 name="confirmPassword"
