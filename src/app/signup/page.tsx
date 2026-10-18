@@ -17,12 +17,12 @@ const SignUpPage = () => {
 
     const { data, error } = await signUp.email({
       ...user,
-      callbackURL: "/",
+      callbackURL: "/signin",
     });
 
     if (data) {
       toast.success("Sign up successfully!");
-      redirect("/");
+      redirect("/signin");
     }
     if (error) {
       toast.error(error.message ?? "Sign up failed")
@@ -35,7 +35,7 @@ const SignUpPage = () => {
         });
         if (data) {
         
-      redirect("/");
+      redirect("/signin");
     }
     if (error) {
       toast.error(error.message ?? "Sign up failed")
@@ -46,10 +46,10 @@ const SignUpPage = () => {
     const handleGitHubSignUp = async () => {
        const {data, error} = await authClient.signIn.social({
         provider: "github",
-        callbackURL: "/",
+        callbackURL: "/signin",
     })
     if (data) {
-      redirect("/");
+      redirect("/signin");
     }
     if (error) {
       toast.error(error.message ?? "Sign up failed")

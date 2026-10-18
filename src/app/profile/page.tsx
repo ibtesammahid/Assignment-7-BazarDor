@@ -66,7 +66,7 @@ export default function ProfilePage() {
         <div className="rounded-xl bg-white p-8 text-center shadow-sm">
           <p className="mb-4">প্রোফাইল দেখতে প্রথমে লগইন করুন।</p>
           <Link
-            href="/login"
+            href="/signin"
             className="inline-block rounded-lg bg-[#05893e] px-5 py-2 text-white"
           >
             লগইন করুন
