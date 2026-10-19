@@ -13,24 +13,22 @@ const formatBn = (value: number) => value.toLocaleString("bn-BD");
 const ProductDetails = async ({ params }: ProductDetailsProps) => {
   const { slug } = await params;
 
-  // const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
-  const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
+  const res = await fetch(
+    "https://openapi.programming-hero.com/api/bazardor/products"
+  );
 
-if (!res.ok) {
-  throw new Error(`Failed to fetch products: ${res.status}`);
-}
+  if (!res.ok) {
+    throw new Error(`Failed to fetch products: ${res.status}`);
+  }
 
-const data = await res.json();
+  const data = await res.json();
 
-console.log("Is array:", Array.isArray(data));
-console.log("API data:", data);
+  const products: Product[] = Array.isArray(data)
+    ? data
+    : Array.isArray(data.data)
+      ? data.data
+      : [];
 
-const products: Product[] = Array.isArray(data)
-  ? data
-  : Array.isArray(data.data)
-    ? data.data
-    : [];
-    
   const product = products.find((item) => item.slug === slug);
 
   if (!product) {
@@ -44,55 +42,67 @@ const products: Product[] = Array.isArray(data)
 
   const lowestPrice = Math.min(...product.markets.map((m) => m.min));
   const highestPrice = Math.max(...product.markets.map((m) => m.max));
+
   const averagePrice =
-    product.markets.reduce((sum, market) => sum + (market.min + market.max) / 2, 0) /
-    product.markets.length;
+    product.markets.reduce(
+      (sum, market) => sum + (market.min + market.max) / 2,
+      0
+    ) / product.markets.length;
 
   return (
-    <main className="min-h-screen flex-1 bg-[#f0f5f0]">
-      <div className="mx-auto max-w-5xl px-4 py-5 sm:px-6">
+    <main className="min-w-0 flex-1 bg-[#f0f5f0]">
+      <div className="mx-auto min-h-screen w-full max-w-5xl px-3 py-4 sm:px-5 sm:py-6 md:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <div className="mb-4 flex items-center gap-2 text-xs text-gray-500">
-          <Link href="/" className="hover:text-[#05893E]">
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-gray-500 sm:text-sm"
+        >
+          <Link href="/" className="shrink-0 hover:text-[#05893E]">
             হোম
           </Link>
+
           <span>/</span>
+
           <Link
             href={`/category/${product.category}`}
             className="hover:text-[#05893E]"
           >
             {product.categoryNameBn}
           </Link>
+
           <span>/</span>
-          <span className="text-gray-700">{product.nameBn}</span>
-        </div>
+
+          <span className="wrap-break-word text-gray-700">
+            {product.nameBn}
+          </span>
+        </nav>
 
         {/* Product summary card */}
-        <section className="mb-4 flex flex-col justify-between gap-4 rounded-xl border border-[#e5ece5] bg-[#fafcfb] p-5 sm:flex-row sm:items-center">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#f0f2ed] text-2xl">
+        <section className="mb-4 flex min-w-0 flex-col gap-4 rounded-xl border border-[#e5ece5] bg-[#fafcfb] p-3 sm:p-5 md:flex-row md:items-center md:justify-between">
+          <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f0f2ed] text-2xl sm:h-14 sm:w-14 sm:text-3xl">
               {product.image || product.categoryIcon}
             </div>
 
-            <div>
-              <h1 className="text-xl font-bold text-[#26352b]">
+            <div className="min-w-0">
+              <h1 className="wrap-break-word text-lg font-bold leading-relaxed text-[#26352b] sm:text-xl md:text-2xl">
                 {product.nameBn}
               </h1>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-gray-500 sm:text-sm">
                 প্রতি {product.unit === "kg" ? "কেজি" : product.unit}
               </p>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs leading-relaxed text-gray-500 sm:text-sm">
                 বিভিন্ন বাজারের আজকের দামের তুলনা
               </p>
             </div>
           </div>
 
-          <div className="min-w-24 rounded-xl bg-[#f0f5f0] px-5 py-3 text-center">
-            <p className="text-xs text-gray-500">আজকের দাম</p>
+          <div className="w-full rounded-xl bg-[#f0f5f0] px-4 py-3 text-center sm:px-5 md:w-auto md:min-w-36 md:shrink-0">
+            <p className="text-xs text-gray-500 sm:text-sm">আজকের দাম</p>
 
-            <p className="text-2xl font-bold text-[#26352b]">
+            <p className="mt-1 text-2xl font-bold text-[#26352b] sm:text-3xl">
               {formatBn(product.today)}
             </p>
 
@@ -118,12 +128,12 @@ const products: Product[] = Array.isArray(data)
         </section>
 
         {/* Price overview */}
-        <section className="mb-5 rounded-xl border border-[#e5ece5] bg-[#fafcfb] p-4">
-          <h2 className="mb-3 text-sm font-bold text-[#26352b]">
+        <section className="mb-5 min-w-0 rounded-xl border border-[#e5ece5] bg-[#fafcfb] p-3 sm:p-5">
+          <h2 className="mb-3 text-sm font-bold text-[#26352b] sm:text-base">
             বাজারদরের সংক্ষিপ্তসার
           </h2>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <PriceSummary
               title="সর্বনিম্ন দাম"
               price={lowestPrice}
@@ -147,23 +157,31 @@ const products: Product[] = Array.isArray(data)
           </div>
 
           {/* Market table */}
-          <h2 className="mb-3 mt-6 text-sm font-bold text-[#26352b]">
+          <h2 className="mb-3 mt-5 text-sm font-bold text-[#26352b] sm:mt-6 sm:text-base">
             বাজারভিত্তিক আজকের দাম
           </h2>
 
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[560px] border-collapse text-left text-xs">
+          <div className="w-full overflow-x-auto rounded-lg">
+            <table className="w-full min-w-140 border-collapse text-left text-xs sm:text-sm">
               <thead>
                 <tr className="bg-[#f0f5f0] text-gray-600">
-                  <th className="px-3 py-3 font-semibold">বাজার</th>
-                  <th className="px-3 py-3 font-semibold">বিভাগ</th>
-                  <th className="px-3 py-3 text-right font-semibold">
+                  <th className="whitespace-nowrap px-3 py-3 font-semibold">
+                    বাজার
+                  </th>
+
+                  <th className="whitespace-nowrap px-3 py-3 font-semibold">
+                    বিভাগ
+                  </th>
+
+                  <th className="whitespace-nowrap px-3 py-3 text-right font-semibold">
                     সর্বনিম্ন
                   </th>
-                  <th className="px-3 py-3 text-right font-semibold">
+
+                  <th className="whitespace-nowrap px-3 py-3 text-right font-semibold">
                     সর্বোচ্চ
                   </th>
-                  <th className="px-3 py-3 text-right font-semibold">
+
+                  <th className="whitespace-nowrap px-3 py-3 text-right font-semibold">
                     গড় দাম
                   </th>
                 </tr>
@@ -177,23 +195,23 @@ const products: Product[] = Array.isArray(data)
                       index % 2 === 0 ? "bg-white" : "bg-[#f4f8f4]"
                     }`}
                   >
-                    <td className="px-3 py-3 font-medium text-gray-700">
+                    <td className="whitespace-nowrap px-3 py-3 font-medium text-gray-700">
                       {market.market}
                     </td>
 
-                    <td className="px-3 py-3 text-gray-600">
+                    <td className="whitespace-nowrap px-3 py-3 text-gray-600">
                       {market.division}
                     </td>
 
-                    <td className="px-3 py-3 text-right">
+                    <td className="whitespace-nowrap px-3 py-3 text-right">
                       {formatBn(market.min)} টাকা
                     </td>
 
-                    <td className="px-3 py-3 text-right">
+                    <td className="whitespace-nowrap px-3 py-3 text-right">
                       {formatBn(market.max)} টাকা
                     </td>
 
-                    <td className="px-3 py-3 text-right font-medium">
+                    <td className="whitespace-nowrap px-3 py-3 text-right font-medium">
                       {formatBn(Math.round(market.average))} টাকা
                     </td>
                   </tr>
@@ -201,6 +219,10 @@ const products: Product[] = Array.isArray(data)
               </tbody>
             </table>
           </div>
+
+          <p className="mt-2 text-[11px] text-gray-500 sm:hidden">
+            বাজারের সম্পূর্ণ তথ্য দেখতে টেবিলটি ডানে-বামে সরান।
+          </p>
         </section>
       </div>
     </main>
@@ -221,14 +243,18 @@ function PriceSummary({
   description,
 }: PriceSummaryProps) {
   return (
-    <div className="rounded-xl border border-[#e5ece5] bg-white p-4">
-      <p className="text-xs font-medium text-gray-500">{title}</p>
+    <div className="min-w-0 rounded-xl border border-[#e5ece5] bg-white p-3 sm:p-4">
+      <p className="text-xs font-medium text-gray-500 sm:text-sm">
+        {title}
+      </p>
 
-      <p className={`mt-2 text-lg font-bold ${color}`}>
+      <p className={`mt-2 wrap-break-word text-lg font-bold sm:text-xl ${color}`}>
         {formatBn(price)} টাকা
       </p>
 
-      <p className="mt-1 text-[10px] text-gray-500">{description}</p>
+      <p className="mt-1 text-[10px] leading-relaxed text-gray-500 sm:text-xs">
+        {description}
+      </p>
     </div>
   );
 }

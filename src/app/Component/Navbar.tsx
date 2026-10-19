@@ -6,39 +6,73 @@ import DateBadge from "./CurrentDateNav";
 import { NavlinksTypes } from "@/Types/NavlinksTypes";
 import UserInfo from "./UserInfo";
 
-const Navbar = async () => {
-  // const res = await fetch("https://api.abcz.workers.dev/api/bazardor/categories");
-  const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
+async function getCategories(): Promise<NavlinksTypes[]> {
+  "use cache";
 
-  const categories: NavlinksTypes[] = await res.json();
+  const res = await fetch(
+    "https://openapi.programming-hero.com/api/bazardor/categories",
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch categories");
+  }
+
+  const data = await res.json();
+
+  return Array.isArray(data)
+    ? data
+    : Array.isArray(data.categories)
+      ? data.categories
+      : Array.isArray(data.data)
+        ? data.data
+        : [];
+}
+
+const Navbar = async () => {
+  const categories = await getCategories();
+
   return (
-    <div className=" border-b border-gray-100 bg-[#fafcfa]">
-      <div className="flex justify-between items-center px-4 py-3 mx-auto max-w-7xl">
-        <div className="flex items-center gap-2">
-          <Link href="/">
+    <header className="w-full min-w-0 border-b border-gray-100 bg-[#fafcfa]">
+      <div className="mx-auto flex w-full max-w-7xl min-w-0 items-center justify-between gap-3 px-3 py-3 sm:gap-4 sm:px-5 md:px-6 lg:px-8">
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+          <Link
+            href="/"
+            aria-label="বাজার দর হোম পেজ"
+            className="shrink-0 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#05893E] focus-visible:ring-offset-2"
+          >
             <Image
               src={Logo}
-              alt="Logo"
-              width={30}
-              height={30}
-              className="border bg-[#05893E] rounded-[5px] p-2"
+              alt="বাজার দর লোগো"
+              width={40}
+              height={40}
+              priority
+              className="size-9 rounded-md border border-[#05893E] bg-[#05893E] p-1.5 object-contain sm:size-10"
             />
           </Link>
 
-          <div>
-            <Link href="/" className="font-bold text-xl">
+          <div className="min-w-0">
+            <Link
+              href="/"
+              className="block truncate text-lg font-bold leading-tight text-[#26352b] sm:text-xl"
+            >
               বাজার দর
             </Link>
-            <DateBadge />
+
+            <div className="mt-1">
+              <DateBadge />
+            </div>
           </div>
         </div>
 
-        <UserInfo />
+        <div className="flex shrink-0 items-center">
+          <UserInfo />
+        </div>
       </div>
-      <div className="border-t border-gray-100">
+
+      <div className="w-full min-w-0 border-t border-gray-100">
         <Navlinks categories={categories} />
       </div>
-    </div>
+    </header>
   );
 };
 

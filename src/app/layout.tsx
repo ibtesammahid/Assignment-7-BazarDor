@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
@@ -15,27 +16,53 @@ export const metadata: Metadata = {
   description: "A bazaar for all your needs",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
-  const date = Intl.DateTimeFormat("bn-BD", {
+async function getRenderedAt() {
+  "use cache";
+  return Date.now();
+}
+
+export default async function RootLayout({
+  children,
+}: LayoutProps<"/">) {
+  const renderedAt = await getRenderedAt();
+
+  const date = new Intl.DateTimeFormat("bn-BD", {
     dateStyle: "full",
-  }).format(new Date());
+  }).format(renderedAt);
 
   return (
     <html
-      lang="en"
+      lang="bn"
       data-theme="light"
-      className={`${notoSerifBengali.className} h-full antialiased`}
+      className={`${notoSerifBengali.className} min-h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col ">
-        <header className="sticky top-0 z-50 bg-white">
-          <Navbar/>
+      <body className="flex min-h-screen flex-col overflow-x-hidden">
+        <header className="sticky top-0 z-50 w-full bg-white">
+          <Navbar />
         </header>
-        <Marquee />
-        <main>{children}</main>
-        <section className=" bg-[#fafcfa] ">
+
+        <div className="w-full min-w-0 overflow-hidden">
+          <Marquee />
+        </div>
+
+        <main className="w-full min-w-0 flex-1">
+          {children}
+        </main>
+
+        <section className="w-full bg-[#fafcfa]">
           <Footer />
         </section>
-        <Toaster />
+
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              maxWidth: "calc(100vw - 32px)",
+              overflowWrap: "anywhere",
+            },
+          }}
+        />
       </body>
     </html>
   );

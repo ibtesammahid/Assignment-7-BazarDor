@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -6,7 +5,6 @@ import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { FaArrowLeft, FaPen } from "react-icons/fa";
 import Link from "next/link";
-import { ImageError } from "next/dist/server/image-optimizer";
 import Image from "next/image";
 
 export default function ProfilePage() {
@@ -54,20 +52,29 @@ export default function ProfilePage() {
 
   if (isPending) {
     return (
-      <main className="min-h-[70vh] bg-[#f0f5f0] p-6">
-        <p className="mx-auto max-w-xl">লোড হচ্ছে...</p>
+      <main className="min-h-[70vh] bg-[#f0f5f0] px-4 py-8 sm:px-6 sm:py-12">
+        <p className="mx-auto max-w-xl text-sm text-gray-600 sm:text-base">
+          লোড হচ্ছে...
+        </p>
       </main>
     );
   }
 
   if (!user) {
     return (
-      <main className="flex min-h-[70vh] items-center justify-center bg-[#f0f5f0] p-6">
-        <div className="rounded-xl bg-white p-8 text-center shadow-sm">
-          <p className="mb-4">প্রোফাইল দেখতে প্রথমে লগইন করুন।</p>
+      <main className="flex min-h-[70vh] items-center justify-center bg-[#f0f5f0] px-4 py-8 sm:px-6">
+        <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-5 text-center shadow-sm sm:p-8">
+          <h1 className="text-lg font-bold text-[#202820] sm:text-xl">
+            প্রোফাইল দেখতে লগইন করুন
+          </h1>
+
+          <p className="mt-2 text-sm leading-relaxed text-gray-500">
+            আপনার ব্যক্তিগত তথ্য দেখতে প্রথমে আপনার অ্যাকাউন্টে লগইন করুন।
+          </p>
+
           <Link
             href="/signin"
-            className="inline-block rounded-lg bg-[#05893e] px-5 py-2 text-white"
+            className="mt-5 inline-flex min-h-11 items-center justify-center rounded-lg bg-[#05893e] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-green-700"
           >
             লগইন করুন
           </Link>
@@ -77,38 +84,42 @@ export default function ProfilePage() {
   }
 
   return (
-    <main className="min-h-[70vh] bg-[#f0f5f0] px-4 py-12">
-      <div className="mx-auto max-w-2xl">
-        <h1 className="text-2xl font-bold text-[#202820]">
-          আমার প্রোফাইল
-        </h1>
+    <main className="min-h-[70vh] min-w-0 bg-[#f0f5f0] px-3 py-6 sm:px-6 sm:py-10 md:py-12">
+      <div className="mx-auto w-full max-w-2xl">
+        {/* Page heading */}
+        <header>
+          <h1 className="text-xl font-bold leading-relaxed text-[#202820] sm:text-2xl md:text-3xl">
+            আমার প্রোফাইল
+          </h1>
 
-        <p className="mt-1 text-sm text-gray-500">
-          আপনার ব্যক্তিগত তথ্য এখানে দেখুন
-        </p>
+          <p className="mt-1 text-xs leading-relaxed text-gray-500 sm:text-sm">
+            আপনার ব্যক্তিগত তথ্য এখানে দেখুন
+          </p>
+        </header>
 
         {/* User information */}
-        <section className="mt-6 flex items-center justify-between gap-4 rounded-xl border border-gray-200 bg-white p-4 sm:p-5">
+        <section className="mt-5 flex min-w-0 flex-col gap-4 rounded-xl border border-gray-200 bg-white p-3 sm:mt-6 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:p-5">
           <div className="flex min-w-0 items-center gap-3">
             {user.image ? (
               <Image
                 src={user.image}
-                alt={user.name}
+                alt={user.name || "প্রোফাইল ছবি"}
                 width={48}
                 height={48}
-                className="h-12 w-12 shrink-0 rounded-xl object-cover"
+                className="h-11 w-11 shrink-0 rounded-xl object-cover sm:h-12 sm:w-12"
               />
             ) : (
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-green-100 text-lg font-bold text-green-700">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-green-100 text-lg font-bold text-green-700 sm:h-12 sm:w-12">
                 {user.name?.charAt(0)?.toUpperCase() ?? "U"}
               </div>
             )}
 
-            <div className="min-w-0">
-              <h2 className="truncate font-semibold text-gray-800">
+            <div className="min-w-0 flex-1">
+              <h2 className="truncate text-sm font-semibold text-gray-800 sm:text-base">
                 {user.name}
               </h2>
-              <p className="truncate text-xs text-gray-500 sm:text-sm">
+
+              <p className="break-all text-xs leading-relaxed text-gray-500 sm:text-sm">
                 {user.email}
               </p>
             </div>
@@ -116,8 +127,9 @@ export default function ProfilePage() {
 
           {!isEditing && (
             <button
+              type="button"
               onClick={handleEdit}
-              className="flex shrink-0 items-center gap-2 rounded-lg border border-red-300 px-3 py-2 text-xs text-red-500 transition hover:bg-red-50 sm:text-sm"
+              className="inline-flex min-h-10 w-full shrink-0 items-center justify-center gap-2 rounded-lg border border-red-300 px-3 py-2 text-sm text-red-500 transition hover:bg-red-50 sm:w-auto"
             >
               <FaPen size={11} />
               নাম পরিবর্তন
@@ -126,9 +138,9 @@ export default function ProfilePage() {
         </section>
 
         {/* Editable profile form */}
-        <section className="mt-4 rounded-xl border border-gray-200 bg-white p-5 sm:p-6">
-          <h2 className="mb-5 font-semibold text-gray-800">
-            তথ্য
+        <section className="mt-4 min-w-0 rounded-xl border border-gray-200 bg-white p-3 sm:p-5 md:p-6">
+          <h2 className="mb-4 text-sm font-semibold text-gray-800 sm:mb-5 sm:text-base">
+            ব্যক্তিগত তথ্য
           </h2>
 
           <form
@@ -139,7 +151,7 @@ export default function ProfilePage() {
           >
             <label
               htmlFor="profile-name"
-              className="mb-2 block text-sm text-gray-600"
+              className="mb-2 block text-sm font-medium text-gray-600"
             >
               নাম
             </label>
@@ -149,9 +161,9 @@ export default function ProfilePage() {
               type="text"
               value={isEditing ? name : user.name ?? ""}
               onChange={(event) => setName(event.target.value)}
-              readOnly={!isEditing}
+              readOnly={!isEditing || isSaving}
               maxLength={100}
-              className={`w-full rounded-md border px-3 py-2 text-sm outline-none transition ${
+              className={`min-h-11 w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm outline-none transition sm:text-base ${
                 isEditing
                   ? "border-green-600 bg-white focus:ring-2 focus:ring-green-100"
                   : "border-gray-200 bg-gray-50"
@@ -160,11 +172,11 @@ export default function ProfilePage() {
             />
 
             {isEditing ? (
-              <div className="mt-4 flex gap-3">
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row">
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-md bg-[#05893e] px-4 py-2.5 text-sm text-white transition hover:bg-green-700 disabled:opacity-60"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-[#05893e] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60 sm:flex-1"
                 >
                   {isSaving ? "আপডেট হচ্ছে..." : "আপডেট"}
                 </button>
@@ -172,15 +184,18 @@ export default function ProfilePage() {
                 <button
                   type="button"
                   disabled={isSaving}
-                  onClick={() => setIsEditing(false)}
-                  className="flex items-center gap-2 rounded-md border border-gray-300 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50"
+                  onClick={() => {
+                    setName(user.name ?? "");
+                    setIsEditing(false);
+                  }}
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-600 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                 >
                   <FaArrowLeft size={12} />
                   বাতিল
                 </button>
               </div>
             ) : (
-              <p className="mt-3 text-xs text-gray-400">
+              <p className="mt-3 text-xs leading-relaxed text-gray-400 sm:text-sm">
                 নাম পরিবর্তন করতে উপরের নাম পরিবর্তন বাটনে ক্লিক করুন।
               </p>
             )}

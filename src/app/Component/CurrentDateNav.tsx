@@ -10,6 +10,11 @@ const DateBadge = () => {
     }).format(new Date())
   );
 
-  return <p className="text-[12px]">{date}</p>;
-}
+  return (
+    <p className="max-w-full wrap-break-words text-[11px] leading-relaxed text-gray-600 sm:text-xs">
+      {date}
+    </p>
+  );
+};
+
 export default DateBadge;
