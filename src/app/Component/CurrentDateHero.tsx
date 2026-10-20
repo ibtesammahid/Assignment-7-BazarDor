@@ -1,13 +1,21 @@
+
 "use client";
 
-import { useState } from "react";
+import { useSyncExternalStore } from "react";
+
+const getDate = () =>
+  new Intl.DateTimeFormat("bn-BD", {
+    dateStyle: "full",
+    timeZone: "Asia/Dhaka",
+  }).format(new Date());
+
+const subscribe = () => () => {};
 
 const HeroDate = () => {
-  const [date] = useState(() =>
-    new Intl.DateTimeFormat("bn-BD", {
-      dateStyle: "full",
-      timeZone: "Asia/Dhaka",
-    }).format(new Date())
+  const date = useSyncExternalStore(
+    subscribe,
+    getDate,
+    () => "আজকের তারিখ"
   );
 
   return <span>{date}</span>;

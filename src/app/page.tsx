@@ -4,9 +4,6 @@ import TodayPriceUp from "./Component/TodayPriceUp";
 import TodayPriceDown from "./Component/TodayPriceDown";
 
 export default function Home() {
-//   const date = Intl.DateTimeFormat("bn-BD", {
-//     dateStyle: "full",
-//   }).format(new Date());
 
   return (
     <div className="w-full min-w-0">
