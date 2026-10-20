@@ -46,7 +46,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           </div>
 
           <div className="min-w-0 flex-1">
-            <h3 className="break-words text-sm font-bold leading-5 text-[#26352b] [overflow-wrap:anywhere]">
+            <h3 className="wrap-break-word text-sm font-bold leading-5 text-[#26352b]">
               {product.nameBn}
             </h3>
 
@@ -61,7 +61,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <div className="min-w-0">
             <p className="text-xs text-gray-500">আজকের দাম</p>
 
-            <p className="mt-1 break-words text-sm font-bold leading-5 text-[#26352b] sm:text-base">
+            <p className="mt-1 wrap-break-word text-sm font-bold leading-5 text-[#26352b] sm:text-base">
               {toBanglaNumber(product.today)} টাকা
             </p>
           </div>

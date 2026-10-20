@@ -24,7 +24,7 @@ const banglaNumber = (value: number) => value.toLocaleString("bn-BD");
 const CategoryProductList = ({
   products,
 }: CategoryProductListProps) => {
-  const [search, setSearch] = useState("");
+  const [search] = useState("");
   const [sortBy, setSortBy] = useState("default");
 
   const filteredProducts = useMemo(() => {
@@ -94,7 +94,7 @@ const CategoryProductList = ({
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <h2 className="break-words text-sm font-bold leading-5 text-[#253329] [overflow-wrap:anywhere]">
+                    <h2 className="text-sm font-bold leading-5 text-[#253329] wrap-anywhere">
                       {product.nameBn}
                     </h2>
 

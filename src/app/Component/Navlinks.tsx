@@ -16,7 +16,7 @@ const Navlinks = ({ categories }: NavlinksProps) => {
       aria-label="পণ্যের ক্যাটাগরি"
       className="w-full min-w-0 border-gray-100 bg-[#fafcfa]"
     >
-      <div className="mx-auto flex w-full max-w-7xl gap-2 overflow-x-auto overscroll-x-contain px-3 py-3 text-sm font-bold sm:gap-3 sm:px-5 sm:py-4 md:px-6 lg:gap-5 lg:px-8 [scrollbar-width:thin]">
+      <div className="mx-auto flex w-full max-w-7xl gap-2 overflow-x-auto overscroll-x-contain px-3 py-3 text-sm font-bold sm:gap-3 sm:px-5 sm:py-4 md:px-6 lg:gap-5 lg:px-8 scrollbar-thin">
         {categories.map((category) => {
           const isActive = pathname === `/category/${category.slug}`;
 

@@ -4,14 +4,14 @@ import TodayPriceUp from "./Component/TodayPriceUp";
 import TodayPriceDown from "./Component/TodayPriceDown";
 
 export default function Home() {
-  const date = Intl.DateTimeFormat("bn-BD", {
-    dateStyle: "full",
-  }).format(new Date());
+//   const date = Intl.DateTimeFormat("bn-BD", {
+//     dateStyle: "full",
+//   }).format(new Date());
 
   return (
     <div className="w-full min-w-0">
       {/* Hero Section */}
-      <Hero date={date} />
+      <Hero />
 
       {/* Today's Price Increases */}
       <section className="mx-auto w-full max-w-7xl px-3 py-3 sm:px-5 md:px-6 lg:px-8">

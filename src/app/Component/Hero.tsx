@@ -1,17 +1,20 @@
 import Image from "next/image";
 import hero from "@/assets/bazar-hero.png";
 import HeroDate from "./CurrentDateHero";
+import { Suspense } from "react";
 
-type HeroProps = {
-  date: string;
-};
+// type HeroProps = {
+//   date: string;
+// };
 
-const Hero = ({ date }: HeroProps) => {
+const Hero = () => {
   return (
     <section className="mx-auto my-4 flex w-full max-w-7xl flex-col items-center gap-6 rounded-2xl bg-[#fafcfa] px-4 py-6 sm:my-5 sm:px-6 sm:py-8 md:flex-row md:justify-between md:gap-8 lg:px-10">
       {/* Hero Content */}
       <div className="w-full min-w-0 md:flex-1">
+        <Suspense> 
         <HeroDate />
+        </Suspense>
 
         <h1 className="wrap-break-words pt-3 text-2xl font-bold leading-relaxed text-[#26352b] sm:text-3xl lg:text-4xl">
           আজকের বাজারের দাম এক নজরে
@@ -39,7 +42,7 @@ const Hero = ({ date }: HeroProps) => {
           height={263}
           priority
           sizes="(max-width: 767px) 80vw, (max-width: 1023px) 40vw, 315px"
-          className="h-auto w-full max-w-60 object-contain sm:max-w-[280px] md:max-w-[315px]"
+          className="h-auto w-full max-w-60 object-contain sm:max-w-70 md:max-w-78.75"
         />
       </div>
     </section>

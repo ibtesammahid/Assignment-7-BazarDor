@@ -17,6 +17,7 @@ const tobanglaUnit = (unit: string): string => {
 };
 
 const Marquee = async () => {
+  "use cache";
   const res = await fetch(
     "https://openapi.programming-hero.com/api/bazardor/products",
   );

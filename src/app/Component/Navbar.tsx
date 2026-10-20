@@ -5,6 +5,7 @@ import Link from "next/link";
 import DateBadge from "./CurrentDateNav";
 import { NavlinksTypes } from "@/Types/NavlinksTypes";
 import UserInfo from "./UserInfo";
+import { Suspense } from "react";
 
 async function getCategories(): Promise<NavlinksTypes[]> {
   "use cache";
@@ -59,7 +60,9 @@ const Navbar = async () => {
             </Link>
 
             <div className="mt-1">
+              <Suspense> 
               <DateBadge />
+              </Suspense>
             </div>
           </div>
         </div>
@@ -68,10 +71,11 @@ const Navbar = async () => {
           <UserInfo />
         </div>
       </div>
-
+      <Suspense>
       <div className="w-full min-w-0 border-t border-gray-100">
         <Navlinks categories={categories} />
       </div>
+      </Suspense>
     </header>
   );
 };
